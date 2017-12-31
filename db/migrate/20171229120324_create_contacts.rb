@@ -26,7 +26,7 @@ class CreateContacts < ActiveRecord::Migration[5.1]
     	t.string :businessaddress
     	t.string :otheraddress
     	t.string :outlook_user_id
-    	t.string :visibility, default: 'PUBLIC'
+    	t.string :visibility, default: 'true'
     	t.string :lastmodifieddatetime
     	t.string :contact_id
       t.timestamps

@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20171231152757) do
     t.string "businessaddress"
     t.string "otheraddress"
     t.string "outlook_user_id"
-    t.string "visibility", default: "PUBLIC"
+    t.string "visibility", default: "true"
     t.string "lastmodifieddatetime"
     t.string "contact_id"
     t.datetime "created_at", null: false

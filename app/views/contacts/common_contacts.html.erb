@@ -1,49 +1,70 @@
 
-<div id="toolbar">
+<div id="toolbar"  style="position: relative;top: 10px">
             <button id="button" class="btn btn-default">checkAll</button>
             <button id="button2" class="btn btn-default">uncheckAll</button>
+            <button id="button3" class="btn btn-default">Merge Contact</button>
+
         </div>
 <div class="container">
   <h2>Common Contacts</h2>
-  
-  <table id="table"
-               data-toggle="table"
-               data-toolbar="#toolbar"
-               data-height="460" class="table">
+  <div class="table-responsive"  >
+  <table id="tblRelation"  data-toggle="table" data-toolbar="#toolbar"  class="table table-striped table-hover table-bordered">
     <thead>
       <tr>
-        <th data-field="state" data-checkbox="true"></th>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
-        <th> Master </th>
+        <th>Contacts</th>
+        <th data-field="Firstname">Firstname</th>
+        <th data-field="Lastname">Lastname</th>
+        <th data-field="Email">Email</th>
+        <th>  Master </th>
       </tr>
     </thead>
     <tbody>
       <% @contacts_array.each do |contact| %>
       <tr>
-        <td></td>
+        <td><input type="checkbox" id="merge<%=contact.first.id %>"  value="<%=contact.first.id %>" data="<%=contact.first.id %>" class="contacts_to_merge"></td>
         <td><%=contact.first.contact_firstname %></td>
         <td><%=contact.first.contact_lastname %></td>
         <td><%=contact.first.contact_email %></td>
-        <td> <input type="checkbox" name=""></td>
+        <td> <input type="checkbox" data="<%=contact.first.id %>" class="master_class" id="contact_<%=contact.first.id%>" name=""></td>
       </tr>      
       <%end %>
      
     </tbody>
   </table>
 </div>
+</div>
 
 <script>
-    var $table = $('#table'),
-        $button = $('#button'),
-        $button2 = $('#button2');
-    $(function () {
-        $button.click(function () {
-            $table.bootstrapTable('checkAll');
-        });
-        $button2.click(function () {
-            $table.bootstrapTable('uncheckAll');
-        });
-    });
+  $("#button3").click(function(){
+
+    var checkedVals = $('.contacts_to_merge:checkbox:checked').map(function() {
+    return this.value;
+}).get();
+alert(checkedVals.join(","));
+
+  //   $('input:checkbox.contacts_to_merge').each(function () {
+  //      // var sThisVal = (this.checked ? $(this).attr('data') : "");
+  //      //  console.log(sThisVal);
+  // });
+    // console.log("Merge button is clicked");
+
+    // console.log($('.contacts_to_merge:checkbox:checked').attr('data'));
+  });
+   
+
+   //$('#tblRelation').bootstrapTable('refresh');
+   // $('tblRelation').bootstrapTable('load');
+    // var $table = $('#tblRelation'),
+    //     $button = $('#button'),
+    //     $button2 = $('#button2');
+    // $(function () {
+    //     $button.click(function () {
+    //         $table.bootstrapTable('checkAll');
+    //     });
+    //     $button2.click(function () {
+    //         $table.bootstrapTable('uncheckAll');
+    //     });
+    // });
+
+ 
 </script>

@@ -1,6 +1,7 @@
 class ContactsController < ApplicationController
 include AuthHelper
 
+before_action :set_contact, only: [:update]
   def index
     token = get_access_token
     email = session[:user_email]
@@ -17,8 +18,8 @@ include AuthHelper
 
 
 
-      @contacts = graph.me.contacts.order_by('givenName asc')
- @contacts.each do |contact|
+      contacts = graph.me.contacts.order_by('givenName asc')
+			 contacts.each do |contact|
  	
 
 		if Contact.find_by(contact_id: contact.id).present? 
@@ -85,7 +86,7 @@ include AuthHelper
 
 		end
 
-
+		@contacts = Contact.order(contact_email: :desc)
     else
       # If no token, redirect to the root url so user
       # can sign in.
@@ -104,8 +105,36 @@ include AuthHelper
   	contacts = Contact.search_by_title(contact.contact_email)
   	@contacts_array << contacts
   	end
+  	@contacts_array = @contacts_array.to_a.uniq
   	# byebug
 
   end
+
+
+    def update
+    respond_to do |format|
+      if @contact.update_attributes(visibility: params[:visibility])
+        format.html { redirect_to @contact, notice: 'App user was successfully updated.' }
+        format.json { render status: :ok, location: @contact }
+      else
+        format.html { render :edit }
+        format.json { render json: @contact.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+  private
+
+ def set_contact
+      @contact = Contact.find(params[:id])
+    end
+ 
+
+  def contact_params
+  params.permit(:visibility)
+
+  end
+
 
 end

@@ -2,11 +2,11 @@ Rails.application.routes.draw do
   
 
   resources :app_users
-
+  resources :contacts
 
   get 'calendar/index'
 
-  get 'contacts/index'
+  # get 'contacts/index'
 
   get 'mail/index'
   get '/commondata' => 'contacts#common_contacts',as: "commondata"
