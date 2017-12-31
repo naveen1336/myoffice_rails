@@ -1,0 +1,2 @@
+class MasterContact < ApplicationRecord
+end

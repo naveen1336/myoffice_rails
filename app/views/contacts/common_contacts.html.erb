@@ -1,0 +1,49 @@
+
+<div id="toolbar">
+            <button id="button" class="btn btn-default">checkAll</button>
+            <button id="button2" class="btn btn-default">uncheckAll</button>
+        </div>
+<div class="container">
+  <h2>Common Contacts</h2>
+  
+  <table id="table"
+               data-toggle="table"
+               data-toolbar="#toolbar"
+               data-height="460" class="table">
+    <thead>
+      <tr>
+        <th data-field="state" data-checkbox="true"></th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th> Master </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @contacts_array.each do |contact| %>
+      <tr>
+        <td></td>
+        <td><%=contact.first.contact_firstname %></td>
+        <td><%=contact.first.contact_lastname %></td>
+        <td><%=contact.first.contact_email %></td>
+        <td> <input type="checkbox" name=""></td>
+      </tr>      
+      <%end %>
+     
+    </tbody>
+  </table>
+</div>
+
+<script>
+    var $table = $('#table'),
+        $button = $('#button'),
+        $button2 = $('#button2');
+    $(function () {
+        $button.click(function () {
+            $table.bootstrapTable('checkAll');
+        });
+        $button2.click(function () {
+            $table.bootstrapTable('uncheckAll');
+        });
+    });
+</script>
