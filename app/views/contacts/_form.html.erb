@@ -1,0 +1,147 @@
+<%= form_with(model: contact, local: true) do |form| %>
+  <% if contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contact.errors.count, "error") %> prohibited this form from being saved:</h2>
+
+      <ul>
+      <% contact.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :contact_firstname %>
+    <%= form.text_field :contact_firstname, id: :form_contact_firstname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_email %>
+    <%= form.text_field :contact_email, id: :form_contact_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :birthday %>
+    <%= form.text_field :birthday, id: :form_birthday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :displayname %>
+    <%= form.text_field :displayname, id: :form_displayname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :initials %>
+    <%= form.text_field :initials, id: :form_initials %>
+  </div>
+
+  <div class="field">
+    <%= form.label :middlename %>
+    <%= form.text_field :middlename, id: :form_middlename %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nickname %>
+    <%= form.text_field :nickname, id: :form_nickname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :form_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :generation %>
+    <%= form.text_field :generation, id: :form_generation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :companyname %>
+    <%= form.text_field :companyname, id: :form_companyname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :department %>
+    <%= form.text_field :department, id: :form_department %>
+  </div>
+
+  <div class="field">
+    <%= form.label :officelocation %>
+    <%= form.text_field :officelocation, id: :form_officelocation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :profession %>
+    <%= form.text_field :profession, id: :form_profession %>
+  </div>
+
+  <div class="field">
+    <%= form.label :businesshomepage %>
+    <%= form.text_field :businesshomepage, id: :form_businesshomepage %>
+  </div>
+
+  <div class="field">
+    <%= form.label :assistantname %>
+    <%= form.text_field :assistantname, id: :form_assistantname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :manager %>
+    <%= form.text_field :manager, id: :form_manager %>
+  </div>
+
+  <div class="field">
+    <%= form.label :homephones %>
+    <%= form.text_field :homephones, id: :form_homephones %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mobilephone %>
+    <%= form.text_field :mobilephone, id: :form_mobilephone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :businessphones %>
+    <%= form.text_field :businessphones, id: :form_businessphones %>
+  </div>
+
+  <div class="field">
+    <%= form.label :homeaddress %>
+    <%= form.text_field :homeaddress, id: :form_homeaddress %>
+  </div>
+
+  <div class="field">
+    <%= form.label :businessaddress %>
+    <%= form.text_field :businessaddress, id: :form_businessaddress %>
+  </div>
+
+  <div class="field">
+    <%= form.label :otheraddress %>
+    <%= form.text_field :otheraddress, id: :form_otheraddress %>
+  </div>
+
+  <div class="field">
+    <%= form.label :outlook_user_id %>
+    <%= form.text_field :outlook_user_id, id: :form_outlook_user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :visibility %>
+    <%= form.text_field :visibility, id: :form_visibility %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lastmodifieddatetime %>
+    <%= form.text_field :lastmodifieddatetime, id: :form_lastmodifieddatetime %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_id %>
+    <%= form.text_field :contact_id, id: :form_contact_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

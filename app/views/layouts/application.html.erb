@@ -4,7 +4,7 @@
   <title>O365Tutorial</title>
   <!-- Latest compiled and minified CSS -->
 
-  
+
   <!-- Optional theme -->
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css"> -->
@@ -36,8 +36,10 @@
           <li id='home-nav'><a href="/">Home</a></li>
           <li id='inbox-nav'><a href="/mail/index">Inbox</a></li>
           <li id='calendar-nav'><a href="/calendar/index">Calendar</a></li>
-          <li id='contacts-nav'><a href="<%=contacts_path %>">Contacts</a></li>
-          <li id='contacts-nav'><a href="<%=commondata_path %>">CommonContacts</a></li>
+          <li id='contacts-nav'><a href="<%=contacts_path %>">My Contacts</a></li>
+          <li id='contacts-nav'><a href="<%=commondata_path %>">All Users Contacts</a></li>
+        <li id='contacts-nav'><a href="<%=master_contacts_contacts_path %>">Master Contacts</a></li>
+
           <li id='contacts-nav'><a href="<%=app_users_path%>">User Management</a></li>
 
         </ul>

@@ -5,17 +5,16 @@ module AuthHelper
   CLIENT_ID = '8d9b6ed4-dcf9-4799-be0b-4df74e810b3a'
   # App's client secret. Register the app in Application Registration Portal to get this value.
   CLIENT_SECRET = 'pnqqNPUJXP7312-iqkB5{^-'
-  
+
   # Scopes required by the app
   SCOPES = [ 'openid',
               'profile',
                'offline_access',
-               'User.Read',
-               'Mail.Read',
-               'Contacts.Read',
+               'User.ReadWrite',
+               'Mail.ReadWrite',
+               'Contacts.ReadWrite',
                'email',
-               'Mail.Read',
-               'Calendars.Read',
+               'Calendars.ReadWrite',
                'Device.Read',
                'Files.Read',
                'Files.Read.All',
@@ -36,10 +35,10 @@ module AuthHelper
                                 :site => 'https://login.microsoftonline.com',
                                 :authorize_url => '/common/oauth2/v2.0/authorize',
                                 :token_url => '/common/oauth2/v2.0/token')
-                                
+
     login_url = client.auth_code.authorize_url(:redirect_uri => authorize_url, :scope => SCOPES.join(' '))
   end
-  
+
   # Exchanges an authorization code for a token
   def get_token_from_code(auth_code)
     client = OAuth2::Client.new(CLIENT_ID,
@@ -47,7 +46,7 @@ module AuthHelper
                                 :site => 'https://login.microsoftonline.com',
                                 :authorize_url => '/common/oauth2/v2.0/authorize',
                                 :token_url => '/common/oauth2/v2.0/token')
-                                
+
     token = client.auth_code.get_token(auth_code,
                                        :redirect_uri => authorize_url,
                                        :scope => SCOPES.join(' '))
@@ -89,4 +88,3 @@ module AuthHelper
   email = me.user_principal_name
 end
 end
-

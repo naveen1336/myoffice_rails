@@ -36,6 +36,8 @@ gem 'activerecord-session_store'
 gem 'microsoft_graph'
 
 gem 'pg_search'
+
+gem 'httparty'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

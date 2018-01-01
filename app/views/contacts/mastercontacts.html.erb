@@ -5,7 +5,6 @@
     <th>Last Name</th>
     <th>Email</th>
     <th>Private/Public</th>
-    <th colspan="2">Actions</th>
   </tr>
   <% @contacts.each do |contact| %>
     <tr>
@@ -17,11 +16,8 @@
       <% else %>
       <td><input type="checkbox" id="<%=contact.id %>" data-on-text="public" data-off-text="private" name="my-checkbox"></td>
       <% end %>
-      <td><%= link_to 'Show', contact_path(contact) %></td>
-      <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-      <!-- <td><%#= link_to 'Destroy', root_url, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
-    </tr>
 
+    </tr>
   <% end %>
 </table>
 
