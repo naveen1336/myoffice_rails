@@ -28,7 +28,7 @@
 #               commondata GET    /commondata(.:format)               contacts#common_contacts
 #                     root GET    /                                   home#index
 #                authorize GET    /authorize(.:format)                auth#gettoken
-# 
+#
 
 Rails.application.routes.draw do
 
@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   get '/move_to_master/:id', to: "contacts#move_to_master", as: "move_to_master"
 
   get 'calendar/index'
-
+  get '/sign_out' => "auth#sign_out", as: "sign_out" 
   # get 'contacts/index'
 
   get 'mail/index'

@@ -1,5 +1,5 @@
 class MailController < ApplicationController
-
+layout "fetch_layout"
   include AuthHelper
 
   # after_action :find_email
@@ -11,7 +11,7 @@ class MailController < ApplicationController
 
     if token
       # If a token is present in the session, get messages from the inbox
-      callback = Proc.new do |r| 
+      callback = Proc.new do |r|
         r.headers['Authorization'] = "Bearer #{token}"
         r.headers['X-AnchorMailbox'] = email
       end
@@ -21,7 +21,7 @@ class MailController < ApplicationController
                                  &callback)
 
       @messages = graph.me.mail_folders.find('inbox').messages.order_by('receivedDateTime desc')
-   
+
       puts session[:user_email]
     else
       # If no token, redirect to the root url so user
@@ -31,12 +31,12 @@ class MailController < ApplicationController
   end
 
   private
- 
 
-def find_email  
+
+def find_email
 # get_user_email
 print "this is email add #{session[:user_email]}"
 end
 
-  
+
 end

@@ -37,6 +37,12 @@
 class Contact < ApplicationRecord
 include PgSearch
   pg_search_scope :search_by_title, :against => :contact_email, using: { tsearch: { any_word: true } }
+
+  def self.levenstenin(email)
+
+
+    Contact.find_by_sql(" SELECT * FROM contacts WHERE  (levenshtein(contact_email,'#{email.to_s}') <= 2)   ORDER BY levenshtein(contact_email, '#{email.to_s}')")
+  end
   # [:contact_email, :contact_firstname,:contact_lastname]
 
 end

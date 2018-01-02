@@ -4,18 +4,18 @@
     <th>First Name</th>
     <th>Last Name</th>
     <th>Email</th>
-    <th>Private/Public</th>
+    <!-- <th>Private/Public</th> -->
   </tr>
   <% @contacts.each do |contact| %>
     <tr>
       <td><%= contact.contact_firstname %></td>
       <td><%= contact.contact_lastname%></td>
       <td><%= contact.contact_email %></td>
-      <% if contact.visibility == "true" %>
-      <td><input type="checkbox" id="<%=contact.id %>" data-on-text="public" data-off-text="private" name="my-checkbox" checked></td>
-      <% else %>
-      <td><input type="checkbox" id="<%=contact.id %>" data-on-text="public" data-off-text="private" name="my-checkbox"></td>
-      <% end %>
+      <%# if contact.visibility == "true" %>
+      <!-- <td><input type="checkbox" id="<%#=contact.id %>" data-on-text="public" data-off-text="private" name="my-checkbox" checked></td> -->
+      <%# else %>
+      <!-- <td><input type="checkbox" id="<%#=contact.id %>" data-on-text="public" data-off-text="private" name="my-checkbox"></td> -->
+      <%# end %>
 
     </tr>
   <% end %>

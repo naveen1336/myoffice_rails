@@ -1,4 +1,5 @@
 class AppUsersController < ApplicationController
+layout "fetch_layout"
   before_action :set_app_user, only: [:show, :edit, :update, :destroy]
 
   # GET /app_users

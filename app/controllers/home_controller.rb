@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+layout "fetch_layout"
  include AuthHelper
 
 

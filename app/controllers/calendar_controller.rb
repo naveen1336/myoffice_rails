@@ -1,4 +1,5 @@
 class CalendarController < ApplicationController
+layout "fetch_layout"
   include AuthHelper
 
   def index
@@ -6,7 +7,7 @@ class CalendarController < ApplicationController
     email = session[:user_email]
     if token
       # If a token is present in the session, get events from the calendar
-      callback = Proc.new do |r| 
+      callback = Proc.new do |r|
         r.headers['Authorization'] = "Bearer #{token}"
         r.headers['X-AnchorMailbox'] = email
       end

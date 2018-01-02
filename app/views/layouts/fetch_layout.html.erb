@@ -1,0 +1,9 @@
+<%if  AppUser.find_by(email: session[:user_email]).present? %>
+<% if AppUser.find_by(email: session[:user_email]).role == 'Admin' %>
+<%= render :template => 'layouts/admin_layout' %>
+<% elsif AppUser.find_by(email: session[:user_email]).role == 'User'  %>
+<%= render :template => 'layouts/user_layout' %>
+<% end %>
+<% else%>
+<%= render :template => 'layouts/application' %>
+<% end %>

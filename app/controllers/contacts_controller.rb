@@ -3,7 +3,7 @@
 
 require 'httparty'
 class ContactsController < ApplicationController
-
+layout "fetch_layout"
   include AuthHelper
 
   before_action :set_contact, only: [:update,:edit,:move_to_master,:show]
@@ -113,16 +113,29 @@ class ContactsController < ApplicationController
 
 
         def common_contacts
+          master_contacts_ids = MasterContact.pluck(:contact_id)
+          contact_record_ids = ContactRecord.pluck(:contact_id)
+          master_recored_ids = ContactRecord.pluck(:master_id)
 
-          # contacts = Contact.where(visibility: 'true')
-          @contacts_array = Contact.where(visibility: 'true').where.not(contact_id: ContactRecord.pluck(:contact_id)).where.not(contact_id: ContactRecord.pluck(:master_id)).where.not(contact_id: MasterContact.pluck(:contact_id))
-          # @contacts_array = []
+          contacts = Contact.where(visibility: 'true').where.not(contact_id: master_contacts_ids).where.not(contact_id: contact_record_ids).where.not(contact_id: master_recored_ids)
+
+          # @contacts_array = Contact.where(visibility: 'true').where.not(contact_id: ContactRecord.pluck(:contact_id)).where.not(contact_id: ContactRecord.pluck(:master_id)).where.not(contact_id: MasterContact.pluck(:contact_id))
+          contacts_array = []
           #
-          # contacts.each do |contact|
-          #   contacts = Contact.search_by_title(contact.contact_email).where.not(contact_id: ContactRecord.pluck(:contact_id)).where.not(contact_id: ContactRecord.pluck(:master_id))
-          #   @contacts_array << contacts
-          # end
-          # @contacts_array = @contacts_array.to_a
+          contacts.each do |contact|
+            contacts = Contact.levenstenin(contact.contact_email)
+            # contacts = Contact.search_by_title(contact.contact_email).where.not(contact_id: ContactRecord.pluck(:contact_id)).where.not(contact_id: ContactRecord.pluck(:master_id))
+            contacts_array << contacts.uniq
+          end
+
+          # byebug
+
+          #
+            # contacts_array = conta
+            @contacts_array = contacts_array.flatten
+          #byebug
+
+           # @contacts_array = [@contacts_array.flatten - contact_record_ids.flatten - master_contacts_ids.flatten].flatten
           # # byebug
 
         end
@@ -186,10 +199,15 @@ class ContactsController < ApplicationController
               contact_list.each do |contact|
                 ContactRecord.create(contact_id: Contact.find(contact).contact_id,master_id: Contact.find(master_list).contact_id )
               end
-              master_contact_id = Contact.find(master_list).contact_id
+              #master_contact_id = Contact.find(master_list).contact_id
+              # byebug
+              @master_contact = MasterContact.new(Contact.where(id: contact_list).order('lastmodifieddatetime desc').first.as_json(:except => [:id,:created_at,:updated_at]))
+              @master_contact.contact_email = Contact.find(master_list).contact_email
+               @master_contact.save
 
-              MasterContact.create(Contact.find_by(contact_id: master_contact_id).as_json(:except => :id))
-              render status: :ok
+
+                render json: {head: :ok,success: true }
+
 
 
 
@@ -198,7 +216,7 @@ class ContactsController < ApplicationController
             end
 
             def move_to_master
-            if   MasterContact.create(@contact.as_json(:except => :id))
+            if   MasterContact.create(@contact.as_json(:except => [:id,:created_at,:updated_at]))
               redirect_to commondata_path
 
             end

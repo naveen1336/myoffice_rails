@@ -99,7 +99,12 @@ $('.modal-footer #merger_contact_id').val(contact_ids);
                  method: 'POST',
                  data: {contact_ids: contact_ids, master_ids: master_ids},
                  success: function(data){
-                     document.location.reload();
+                    // var r = $.parseJSON(data);
+                    console.log(data.success)
+                    if (data.success == true) {
+                      location.reload();
+                    }
+                     // document.location.reload();
                  },
                  error: function(errorThrown){
                      console.log( errorThrown );

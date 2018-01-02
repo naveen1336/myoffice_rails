@@ -16,4 +16,12 @@ class AuthController < ApplicationController
   end
 end
 
+def sign_out
+session[:azure_token] = nil
+session[:user_email] = nil
+
+redirect_to root_path
+
+end
+
 end
